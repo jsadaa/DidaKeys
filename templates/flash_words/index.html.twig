@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main class="container list-container">
+        <div class="new-list">
+            <h2>Nouvelle liste de mots</h2>
+            <form action="{{ path("flash_words_add") }}" method="post">
+                <div class="form-group">
+                    <label for="listName">Nom de la liste</label>
+                    <input type="text" class="form-control" id="listName" name="title" required>
+                    <button type="submit" class="list-submit">Créer</button>
+                </div>
+                <div class="form-group">
+                    <h3>Entrez les mots de la liste</h3>
+                    <div class="word-list-buttons-container">
+                        <button type="button" id="remove-word" class="word-button contrast material-icons">remove</button>
+                        <button type="button" id="add-word" class="word-button contrast material-icons">add</button>
+                    </div>
+                    <input type="text" class="form-control word-input" name="words[]" required>
+                </div>
+            </form>
+        </div>
+        <div class="list-list">
+            <h2>Listes de mots</h2>
+                {% for list in wordLists %}
+                    <details>
+                        <summary>{{ list.getTitle() }}</summary>
+                            {% for word in list.getWords() %}
+                                <p>- {{ word }}</p>
+                            {% endfor %}
+                    </details>
+                {% endfor %}
+        </div>
+    </main>
+{% endblock %}
