@@ -13,6 +13,10 @@ router.addRoute('/letter/castle', () => {
     let _letterCastleView = new LetterCastleView();
 });
 
+router.addRoute('/', () => {
+
+});
+
 window.onload = () => {
     router.navigate(window.location.pathname);
 };
