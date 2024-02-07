@@ -27,7 +27,10 @@ class NumberCastleView extends CastleView {
                 } else {
                     if (item.classList.contains('operation')) {
                         this.resetNumber(item);
-                    } else {
+                    } else if (item.classList.contains('current-operand')) {
+                        this.resetNumbers();
+                    }
+                    else {
                         this.resetNumbers();
                         this.applyCross(item);
                     }
@@ -44,7 +47,6 @@ class NumberCastleView extends CastleView {
             this.playButton.disabled = this.calculateMode;
             this.pauseButton.disabled = this.calculateMode;
             this.stopButton.disabled = this.calculateMode;
-            this.revealAllButton.disabled = this.calculateMode;
             this.range.disabled = this.calculateMode;
         });
 
@@ -93,6 +95,12 @@ class NumberCastleView extends CastleView {
             minusTen.classList.add('no-border');
             minusTen.classList.add('operation');
         }
+
+        this.items.forEach((item) => {
+            if (item !== plusOne && item !== minusOne && item !== plusTen && item !== minusTen && item !== this.items[index]) {
+                item.classList.toggle('blur');
+            }
+        });
     }
 
     resetNumber(item) {
@@ -100,6 +108,7 @@ class NumberCastleView extends CastleView {
         item.classList.remove('current-operand');
         item.classList.remove('no-border');
         item.classList.remove('operation');
+        item.classList.remove('blur');
     }
 
     resetNumbers() {
