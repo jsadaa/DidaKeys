@@ -15,23 +15,35 @@
         <nav class="attached-to-top">
             <ul>
                 <li><strong>Dida Keys !</strong></li>
-                <li><i class="material-icons-outlined">key</i></li>
                 <li><a href="{{ path("home")}}" class="contrast"><i class="material-icons-outlined">home</i></a></li>
             </ul>
+            {% if app.request.attributes.get('_route') != 'home' %}
+                <ul>
+                    <li>
+                        <a href="#">Scores</a>
+                    </li>
+                    <li>
+                        <span id="score-counter">0</span>
+                    </li>
+                    <li>
+                        <i id="key-icon" class="material-icons-outlined">key</i>
+                    </li>
+                </ul>
+            {% endif %}
             <ul>
                 <li>
-                    <a href="#">Scores</a>
+                    {% if app.user %}
+                        {{ app.user.getUserIdentifier() }}
+                    {% endif %}
                 </li>
                 <li>
-                    <span id="score-counter">0</span>
-                </li>
+                    <a href="{{ path("_logout_main") }}" id="logout-button" class="nav-button contrast">
+                        <i class="material-icons-outlined">
+                            logout
+                        </i>
+                    </a>
                 <li>
-                    <i id="key-icon" class="material-icons-outlined">key</i>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <button id="theme-switcher" class="contrast">
+                    <button id="theme-switcher" class="nav-button contrast">
                         <i class="material-icons-outlined">
                             light_mode
                         </i>
