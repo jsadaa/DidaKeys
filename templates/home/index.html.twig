@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="cards-container">
+            <article>
+                <header class="card-header">
+                    <hgroup>
+                        <h2>Château des Lettres</h2>
+                        <p>Apprendre à reconnaître les lettres</p>
+                    </hgroup>
+                    <img class="card-img" src="{{ asset('img/letters.png') }}" alt="numbers">
+                </header>
+                <a href="{{ path("letter_castle") }}" role="button">Jouer</a>
+            </article>
+            <article>
+                <header class="card-header">
+                    <hgroup>
+                        <h2>Château des Nombres</h2>
+                        <p>Apprendre à reconnaître les nombres</p>
+                    </hgroup>
+                    <img class="card-img" src="{{ asset('img/numbers.png') }}" alt="letters">
+                </header>
+                <a href="{{ path("number_castle") }}" role="button">Jouer</a>
+            </article>
+            <article>
+                <header class="card-header">
+                    <hgroup>
+                        <h2>Mots Flash</h2>
+                        <p>Apprendre à reconnaître les mots</p>
+                    </hgroup>
+                    <img class="card-img" src="{{ asset('img/flash.png') }}" alt="numbers">
+                </header>
+                <a href="" role="button">Jouer</a>
+            </article>
+        </div>
+    </main>
+{% endblock %}
