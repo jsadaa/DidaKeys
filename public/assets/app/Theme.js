@@ -3,7 +3,7 @@ class Theme {
     theme = localStorage.getItem('theme') || 'auto';
     themeSwitcher = document.getElementById('theme-switcher');
     themeSwitcherIcon = this.themeSwitcher.querySelector('i');
-    castlesIcons = document.querySelectorAll('.castle-icon');
+    castlesIcons = document.querySelectorAll('.game-icon');
 
     constructor() {
         this.addListeners();
