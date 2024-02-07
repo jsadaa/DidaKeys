@@ -146,6 +146,10 @@ article {
     margin: 1rem 2rem;
 }
 
+#theme-switcher {
+    padding: 0.2rem 0.4rem;
+}
+
 .card-img {
     width: 30%;
     height: 200px;
@@ -204,6 +208,11 @@ article {
 
 .current-operand {
     background-color: dodgerblue;
+    border: none;
+}
+
+.operation {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 .no-border {
@@ -264,7 +273,7 @@ main {
     font-weight: bold;
     background-color: dodgerblue;
     color: #fff;
-    border: 1px solid dodgerblue;
+    border: none;
     border-radius: 30px;
 }
 
@@ -275,7 +284,7 @@ main {
 }
 
 .selected-game-button {
-    background-color: dodgerblue;
+    background-color: green;
     color: #fff;
     border: 1px solid #FFFFFF;
     border-radius: 30px;
