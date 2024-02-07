@@ -1,8 +1,9 @@
-import CastleView from "./CastleView.js";
+import GameView from "./GameView.js";
 
-class LetterCastleView extends CastleView {
+class LettersGameView extends GameView {
 
     letterContainer = document.querySelector('.letters-container');
+    capitalButton = document.getElementById('capital-button');
     items = [];
 
     constructor() {
@@ -24,17 +25,28 @@ class LetterCastleView extends CastleView {
             });
         });
 
+        this.capitalButton.addEventListener('click', () => {
+            this.toggleCapital();
+        });
+
         super.addListeners();
     }
 
     createLetter(letter) {
         const letterElement = document.createElement('button');
-        letterElement.classList.add('outline', 'contrast', 'letter-button');
+        letterElement.classList.add('outline', 'contrast', 'letter-button', 'uppercase');
         letterElement.setAttribute('role', 'button');
         letterElement.innerText = letter;
         this.letterContainer.appendChild(letterElement);
         this.items.push(letterElement);
     }
+
+    toggleCapital() {
+        this.items.forEach((item) => {
+            item.classList.toggle('uppercase');
+            item.classList.toggle('lowercase');
+        });
+    }
 }
 
-export default LetterCastleView;
+export default LettersGameView;
