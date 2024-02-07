@@ -5,7 +5,7 @@
 {% block body %}
     <main class="container">
         <div class="cards-container">
-            <article>
+            <article class="home-card">
                 <header class="card-header">
                     <hgroup>
                         <h2>Château des Lettres</h2>
@@ -13,9 +13,9 @@
                     </hgroup>
                     <img class="card-img" src="{{ asset('img/letters.png') }}" alt="numbers">
                 </header>
-                <a href="{{ path("letter_castle") }}" role="button">Jouer</a>
+                <a href="{{ path("letter_game") }}" role="button">Jouer</a>
             </article>
-            <article>
+            <article class="home-card">
                 <header class="card-header">
                     <hgroup>
                         <h2>Château des Nombres</h2>
@@ -23,9 +23,9 @@
                     </hgroup>
                     <img class="card-img" src="{{ asset('img/numbers.png') }}" alt="letters">
                 </header>
-                <a href="{{ path("number_castle") }}" role="button">Jouer</a>
+                <a href="{{ path("number_game") }}" role="button">Jouer</a>
             </article>
-            <article>
+            <article class="home-card">
                 <header class="card-header">
                     <hgroup>
                         <h2>Mots Flash</h2>
@@ -33,7 +33,7 @@
                     </hgroup>
                     <img class="card-img" src="{{ asset('img/flash.png') }}" alt="numbers">
                 </header>
-                <a href="" role="button">Jouer</a>
+                <a href="{{ path("flash_words") }}" role="button">Jouer</a>
             </article>
         </div>
     </main>
