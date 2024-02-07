@@ -1,6 +1,6 @@
 import Game from './Game.js';
 
-class CastleView {
+class GameView {
 
     playButton = document.getElementById('play-button');
     pauseButton = document.getElementById('pause-button');
@@ -14,7 +14,7 @@ class CastleView {
     game = new Game();
     isPlaying = false;
     isPaused = false;
-    currentNumber = 0;
+    currentItemIndex = 0;
 
     constructor() {}
 
@@ -27,15 +27,11 @@ class CastleView {
             this.stopButton.classList.remove('selected-game-button');
 
             if (!this.isPlaying && !this.isPaused) { // new condition here
-                this.start(this.items, this.getRangeValue(), this.currentNumber)
-                    .then(() => {
-                        if (!this.isPaused) { // new condition here
-                            this.stop();
-                        }
-                    });
+                this.play();
             }
             else if (this.isPaused) {
                 this.resume();
+                this.play();
             }
         });
 
@@ -98,6 +94,16 @@ class CastleView {
         });
     }
 
+    play() {
+        this.start(this.items, this.getRangeValue(), this.currentItemIndex)
+            .then(() => {
+                if (!this.isPaused) {
+                    this.stop();
+                    this.playButton.classList.remove('selected-game-button');
+                }
+            });
+    }
+
     async start(items, speed, start = 0) {
         this.isPlaying = true;
         this.range.disabled = true;
@@ -105,7 +111,7 @@ class CastleView {
             if (!this.isPlaying) {
                 break;
             }
-            this.currentNumber = index;
+            this.currentItemIndex = index;
             let numberElement = items[index];
             this.highlightButton(numberElement);
             await new Promise(resolve => setTimeout(() => {
@@ -127,22 +133,14 @@ class CastleView {
         this.isPlaying = true;
         this.isPaused = false;
         this.range.disabled = true;
-
-        // restart the cycle
-        this.start(this.items, this.getRangeValue(), this.currentNumber)
-            .then(() => {
-                if (!this.isPaused) {
-                    this.stop();
-                }
-            });
     }
 
     stop() {
         this.isPlaying = false;
         this.range.disabled = false;
-        this.currentNumber = 0;
+        this.currentItemIndex = 0;
         this.resetAllButtons();
     }
 }
 
-export default CastleView;
+export default GameView;

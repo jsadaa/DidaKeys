@@ -1,6 +1,6 @@
-import CastleView from "./CastleView.js";
+import GameView from "./GameView.js";
 
-class NumberCastleView extends CastleView {
+class NumbersGameView extends GameView {
 
     numberContainer = document.querySelector('.numbers-container');
     calculateButton = document.getElementById('calculate-button');
@@ -112,10 +112,10 @@ class NumberCastleView extends CastleView {
     }
 
     resetNumbers() {
-        this.items.forEach((item, index) => {
+        this.items.forEach((item) => {
             this.resetNumber(item);
         });
     }
 }
 
-export default NumberCastleView;
+export default NumbersGameView;
