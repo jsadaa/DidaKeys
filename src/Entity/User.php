@@ -114,4 +114,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function removeWordList(WordList $wordList): static
+    {
+        $this->wordLists->removeElement($wordList);
+
+        return $this;
+    }
+
+    public function findWordListById(int $id): ?WordList
+    {
+        return $this->wordLists->filter(fn (WordList $wordList) => $wordList->getId() === $id)->first();
+    }
 }

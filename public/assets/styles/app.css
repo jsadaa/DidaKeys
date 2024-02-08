@@ -153,7 +153,17 @@ body {
     right: 0;
     background-color: var(--background-color);
     z-index: 1000;
-    margin: 0 2rem;
+    margin: 0;
+    border-bottom: 2px inset #000;
+    height: 3.5rem;
+}
+
+.attached-to-top ul:first-child {
+    margin-left: 1rem;
+}
+
+.attached-to-top ul:last-child {
+    margin-right: 1rem;
 }
 
 article {
@@ -275,14 +285,24 @@ main {
     margin: 4rem 2rem 2rem 2rem;
     width: auto;
     max-width: none;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .new-list {
+    margin-top: var(--spacing);
     max-width: 40%;
     width: 40%;
+    @media (max-width: 900px) {
+        max-width: 100%;
+        width: 100%;
+    }
 }
 
 .list-list {
+    margin-top: var(--spacing);
     max-width: 40%;
     width: 40%;
     height: 100%;
@@ -290,23 +310,69 @@ main {
     flex-direction: column;
     align-items: start;
     justify-content: flex-start;
+    @media (max-width: 900px) {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+.list-list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-select {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.list-select-button {
+    margin-bottom: var(--spacing);
+    margin-left: var(--spacing);
+    padding: 0.4rem 0.4rem;
 }
 
 .list-submit {
-    width: 40%;
+    width: 30%;
     margin: auto auto 2rem auto;
+    padding: 0.4rem 0.4rem;
+}
+
+.list-detail {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.list-detail > summary {
+    overflow: auto;
+}
+
+.list-detail > ul {
+    overflow: auto;
+}
+
+.list-detail > ul > li {
+    overflow: auto;
+}
+
+.delete-button {
+    background-color: red;
+    border-color: red;
 }
 
 .word-list-buttons-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .word-button {
     width: auto;
-    margin-right: 1rem;
     margin-left: 1rem;
     padding: 0.2rem 0.4rem
 }
@@ -368,7 +434,7 @@ main {
 }
 
 .game-nav {
-    margin: 1rem;
+    margin: 2rem 1rem 1rem 1rem;
 }
 
 #range {

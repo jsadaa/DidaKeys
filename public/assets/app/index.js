@@ -15,7 +15,7 @@ router.addRoute('/letter/game', () => {
     let _lettersGameView = new LettersGameView();
 });
 
-router.addRoute('/flash/words', () => {
+router.addRoute('/flash-words', () => {
     let _wordListView = new WordListView();
 });
 
