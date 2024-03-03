@@ -1,6 +1,6 @@
-import GameView from "./GameView.js";
+import TrailGameView from "./TrailGameView.js";
 
-class LettersGameView extends GameView {
+class LettersGameView extends TrailGameView {
 
     letterContainer = document.querySelector('.letters-container');
     capitalButton = document.getElementById('capital-button');
@@ -19,6 +19,21 @@ class LettersGameView extends GameView {
     }
 
     addListeners() {
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                event.preventDefault();
+
+                if (this.isPlaying) {
+                    this.pause();
+                } else if (this.isPaused) {
+                    this.resume();
+                    this.play();
+                } else {
+                    this.play();
+                }
+            }
+        });
+        
         this.items.forEach((item) => {
             item.addEventListener('click', () => {
                 this.toggleBlur(item);

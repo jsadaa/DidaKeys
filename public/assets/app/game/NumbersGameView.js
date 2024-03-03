@@ -1,6 +1,6 @@
-import GameView from "./GameView.js";
+import TrailGameView from "./TrailGameView.js";
 
-class NumbersGameView extends GameView {
+class NumbersGameView extends TrailGameView {
 
     numberContainer = document.querySelector('.numbers-container');
     calculateButton = document.getElementById('calculate-button');
@@ -20,6 +20,23 @@ class NumbersGameView extends GameView {
     }
 
     addListeners() {
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                event.preventDefault();
+
+                if (!this.calculateMode) {
+                    if (this.isPlaying) {
+                        this.pause();
+                    } else if (this.isPaused) {
+                        this.resume();
+                        this.play();
+                    } else {
+                        this.play();
+                    }
+                }
+            }
+        });
+
         this.items.forEach((item) => {
             item.addEventListener('click', () => {
                 if (!this.calculateMode) {
@@ -43,6 +60,12 @@ class NumbersGameView extends GameView {
             this.calculateButton.classList.toggle('selected-game-button');
             if (!this.calculateMode) {
                 this.resetNumbers();
+            } else {
+                this.resetAllButtons();
+                this.pauseButton.classList.remove('selected-game-button');
+                this.playButton.classList.remove('selected-game-button');
+                this.currentItemIndex = 0;
+                this.stop();
             }
             this.playButton.disabled = this.calculateMode;
             this.pauseButton.disabled = this.calculateMode;
