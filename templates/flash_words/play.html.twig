@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main class="container flash-play-container">
+        <div id="flash-start" class="material-icons">play_circle</div>
+        <div id="lightning-img" style="display: none;">
+            <img src="{{ asset('img/lightning_flash.png') }}" alt="lightning">
+        </div>
+        {% for word in wordList.getWords() %}
+        <div>
+            <div class="word" style="display: none;">{{ word }}</div>
+        </div>
+        {% endfor %}
+    </main>
+{% endblock %}

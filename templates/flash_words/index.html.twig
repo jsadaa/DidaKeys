@@ -3,6 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+    {% set update = update is defined and update %}
     <main class="container list-container">
         <div class="list-list">
             <h2>Listes de mots</h2>
@@ -18,24 +19,39 @@
                     </details>
                     <div class="list-select">
                         <a role="button" href="{{ path("flash_words_play", {"id": list.getId()}) }}" class="list-select-button material-icons">play_arrow</a>
+                        <a role="button" href="{{ path("flash_words_edit", {"id": list.getId()}) }}" class="list-select-button secondary material-icons">edit</a>
                         <a role="button" href="{{ path("flash_words_remove", {"id": list.getId()}) }}" class="list-select-button contrast material-icons">delete</a>
                     </div>
                 </div>
             {% endfor %}
         </div>
         <div class="new-list">
-            <h2>Nouvelle liste de mots</h2>
-            <form action="{{ path("flash_words_add") }}" method="post">
+            {% if update %}
+                <h2>Modifier la liste de mots</h2>
+            {% else %}
+                <h2>Nouvelle liste de mots</h2>
+            {% endif %}
+            <form id="word-list-form" {% if update %} action="{{ path("flash_words_update", {"id": wordList.getId()}) }}" {% else %} action="{{ path("flash_words_add") }}" {% endif %} method="post">
                 <div class="form-group">
-                    <label for="listName">Nom de la liste</label>
-                    <input type="text" class="form-control" id="listName" name="title" required>
+                    <input type="text" placeholder="Nom de la liste" class="form-control" id="listName" name="title" required {% if update %} value="{{ wordList.getTitle() }}" {% endif %}>
                     <button type="submit" class="list-submit material-icons">save_alt</button>
                 </div>
                 <div class="form-group">
                     <h3>Mots de la liste</h3>
-                    <input type="text" class="form-control word-input" name="words[]" required>
+                    {% if update %}
+                        {% for word in wordList.getWords() %}
+                            <div class="word-input-container">
+                                <input type="text" value="{{ word }}" class="form-control word-input" name="words[]" required>
+                                <button type="button" class="remove-word word-button contrast outline material-icons">remove</button>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="word-input-container">
+                            <input type="text" placeholder="Nouveau mot" class="form-control word-input" name="words[]" required>
+                            <button type="button" disabled class="remove-word word-button contrast outline material-icons">remove</button>
+                        </div>
+                    {% endif %}
                     <div class="word-list-buttons-container">
-                        <button type="button" id="remove-word" class="word-button contrast outline material-icons">remove</button>
                         <button type="button" id="add-word" class="word-button contrast outline material-icons">add</button>
                     </div>
                 </div>

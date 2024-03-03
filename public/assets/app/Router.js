@@ -8,7 +8,6 @@ class Router {
   }
 
   navigate(path) {
-    history.pushState({}, "", path);
     this.routes[path]();
   }
 }

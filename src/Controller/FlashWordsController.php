@@ -66,10 +66,62 @@ class FlashWordsController extends AbstractController
     }
 
     #[Route('/flash-words/play/{id}', name: 'flash_words_play')]
-    public function playWordList(WordList $wordList): Response
+    public function playWordList(int $id): Response
     {
+        /** @var User $user */
+        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
+        $wordList = $user->findWordListById($id);
+
+        if ($wordList === null) {
+            throw $this->createNotFoundException('Word list not found');
+        }
+
         return $this->render('flash_words/play.html.twig', [
             'wordList' => $wordList,
         ]);
+    }
+
+    // edit
+    #[Route('/flash-words/edit/{id}', name: 'flash_words_edit')]
+    public function editWordList(int $id): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
+        $wordLists = $user->getWordLists();
+        $wordList = $user->findWordListById($id);
+
+        if ($wordList === null) {
+            throw $this->createNotFoundException('Word list not found');
+        }
+
+        return $this->render('flash_words/index.html.twig', [
+            'wordList' => $wordList,
+            'wordLists' => $wordLists,
+            'update' => true,
+        ]);
+    }
+
+    //update
+    #[Route('/flash-words/update/{id}', name: 'flash_words_update', methods: ['POST'])]
+    public function updateWordList(Request $request, int $id): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
+        $wordList = $user->findWordListById($id);
+
+        if ($wordList === null) {
+            throw $this->createNotFoundException('Word list not found');
+        }
+
+        $data = $request->request->all();
+        $title = $data['title'];
+        $words = $data['words'];
+
+        $wordList->setTitle($title);
+        $wordList->setWords($words);
+
+        $this->userRepository->save($user);
+
+        return $this->redirectToRoute('flash_words');
     }
 }

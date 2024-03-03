@@ -1,31 +1,39 @@
 class WordListView {
 
     addWordButton = document.getElementById('add-word');
-    removeWordButton = document.getElementById('remove-word');
+    form = document.querySelector('form');
+    removeWordButtons = document.querySelectorAll('.remove-word');
 
     constructor() {
-       this.addListeners();
+        this.addListeners();
     }
 
     addListeners() {
         this.addWordButton.addEventListener('click', this.addWord);
-        this.removeWordButton.addEventListener('click', this.removeWord);
+
+        this.removeWordButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                this.removeWord(button);
+            });
+        });
     }
 
-    addWord() {
-        const wordInput = document.querySelector('.word-input:last-of-type');
-        const newWordInput = wordInput.cloneNode(true);
-        newWordInput.value = '';
-        wordInput.after(newWordInput);
+    addWord = () => {
+        const wordContainers = document.querySelectorAll('.word-input-container');
+        const wordContainer = wordContainers[wordContainers.length - 1];
+        const newWordContainer = wordContainer.cloneNode(true);
+        const wordInput = newWordContainer.querySelector('.word-input');
+        const removeWordButton = newWordContainer.querySelector('.remove-word');
+
+        wordInput.value = '';
+        removeWordButton.removeAttribute('disabled');
+        removeWordButton.addEventListener('click', () => this.removeWord(removeWordButton));
+        wordContainer.after(newWordContainer);
     }
 
-    removeWord() {
-        // get all elements with class word-input
-        const wordInputs = document.querySelectorAll('.word-input');
-        // if there is more than one word-input, remove the last one
-        if (wordInputs.length > 1) {
-            wordInputs[wordInputs.length - 1].remove();
-        }
+    removeWord(button) {
+        const wordInputContainer = button.parentElement;
+        wordInputContainer.remove();
     }
 }
 
