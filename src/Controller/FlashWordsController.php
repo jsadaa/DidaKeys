@@ -55,7 +55,7 @@ class FlashWordsController extends AbstractController
         $user = $this->getUser() ?: throw new \LogicException('This can not happen');
         $wordList = $user->findWordListById($id);
 
-        if ($wordList === null) {
+        if (is_null($wordList)) {
             throw $this->createNotFoundException('Word list not found');
         }
 
@@ -72,7 +72,7 @@ class FlashWordsController extends AbstractController
         $user = $this->getUser() ?: throw new \LogicException('This can not happen');
         $wordList = $user->findWordListById($id);
 
-        if ($wordList === null) {
+        if (is_null($wordList)) {
             throw $this->createNotFoundException('Word list not found');
         }
 
@@ -90,7 +90,7 @@ class FlashWordsController extends AbstractController
         $wordLists = $user->getWordLists();
         $wordList = $user->findWordListById($id);
 
-        if ($wordList === null) {
+        if (is_null($wordList)) {
             throw $this->createNotFoundException('Word list not found');
         }
 
@@ -109,7 +109,7 @@ class FlashWordsController extends AbstractController
         $user = $this->getUser() ?: throw new \LogicException('This can not happen');
         $wordList = $user->findWordListById($id);
 
-        if ($wordList === null) {
+        if (is_null($wordList)) {
             throw $this->createNotFoundException('Word list not found');
         }
 

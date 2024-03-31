@@ -1,8 +1,8 @@
 class WordListView {
 
     addWordButton = document.getElementById('add-word');
-    form = document.querySelector('form');
     removeWordButtons = document.querySelectorAll('.remove-word');
+    form = document.querySelector('form');
 
     constructor() {
         this.addListeners();

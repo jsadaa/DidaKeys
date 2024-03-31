@@ -4,9 +4,11 @@
 
 {% block body %}
     <main class="container flash-play-container">
+        <div id="flash-message">Prêt.e.s ?</div>
         <div id="flash-start" class="material-icons">play_circle</div>
+        <div id="flash-restart" style="display: none;" class="material-icons">replay</div>
         <div id="lightning-img" style="display: none;">
-            <img src="{{ asset('img/lightning_flash.png') }}" alt="lightning">
+            <img src="{{ asset('img/lightning_flash_alt_3.png') }}" alt="lightning">
         </div>
         {% for word in wordList.getWords() %}
         <div>

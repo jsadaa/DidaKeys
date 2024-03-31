@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link rel="stylesheet" href="{{ asset('styles/pico/pico.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/pico/pico.min.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% block stylesheets %}
         {% endblock %}
@@ -14,10 +14,40 @@
     <body>
         <nav class="attached-to-top">
             <ul>
-                <li><strong>Dida Keys !</strong></li>
-                <li><a href="{{ path("home")}}" class="contrast"><i class="material-icons-outlined">home</i></a></li>
+                <li>
+                    <details id="menu" role="list" class="dropdown">
+                        <summary id="menu-summary" role="button" class="contrast outline">
+                            <i class="material-icons-outlined">menu</i>
+                        </summary>
+                        <ul id="menu-ul">
+                            <li>
+                                {% if app.user %}
+                                    {{ app.user.getUserIdentifier() }}
+                                {% endif %}
+                            </li>
+                            <li id="logout-li">
+                                <a href="{{ path("_logout_main") }}" id="logout-button" class="nav-button contrast">
+                                    Déconnexion
+                                </a>
+                            <li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <a href="{{ path("home")}}" class="contrast"><strong id="title">DIDA KEYS</strong></a>
+                </li>
             </ul>
-            {% if app.request.attributes.get('_route') != 'home' %}
+            <ul>
+                <li>
+                    <button id="theme-switcher" class="nav-button contrast outline">
+                        <i class="material-icons-outlined">
+                            light_mode
+                        </i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+            <!--{% if app.request.attributes.get('_route') != 'home' %}
                 <ul>
                     <li>
                         <a href="#">Scores</a>
@@ -29,28 +59,7 @@
                         <i id="key-icon" class="material-icons-outlined">key</i>
                     </li>
                 </ul>
-            {% endif %}
-            <ul>
-                <li>
-                    {% if app.user %}
-                        {{ app.user.getUserIdentifier() }}
-                    {% endif %}
-                </li>
-                <li id="logout-li">
-                    <a href="{{ path("_logout_main") }}" id="logout-button" class="nav-button contrast">
-                        <i class="material-icons-outlined">
-                            logout
-                        </i>
-                    </a>
-                <li>
-                    <button id="theme-switcher" class="nav-button contrast">
-                        <i class="material-icons-outlined">
-                            light_mode
-                        </i>
-                    </button>
-                </li>
-            </ul>
-        </nav>
+            {% endif %}-->
         {% block body %}{% endblock %}
         <script type="module" src="{{ asset('app/index.js') }}"></script>
     </body>

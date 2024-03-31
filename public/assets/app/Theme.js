@@ -49,14 +49,14 @@ class Theme {
 
         if (this.theme === 'dark') {
             htmlElement.setAttribute('data-theme', 'dark');
-            this.themeSwitcherIcon.innerText = 'light_mode';
+            this.themeSwitcherIcon.innerText = 'dark_mode';
             localStorage.setItem('theme', 'dark');
             this.castlesIcons.forEach((castleIcon) => {
                 castleIcon.setAttribute('style', 'filter: invert(1)');
             });
         } else {
             htmlElement.setAttribute('data-theme', 'light');
-            this.themeSwitcherIcon.innerText = 'dark_mode';
+            this.themeSwitcherIcon.innerText = 'light_mode';
             localStorage.setItem('theme', 'light');
             this.castlesIcons.forEach((castleIcon) => {
                 castleIcon.setAttribute('style', 'filter: invert(0)');

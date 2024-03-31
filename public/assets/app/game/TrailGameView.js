@@ -8,8 +8,16 @@ class TrailGameView {
     revealAllButton = document.getElementById('reveal-button');
     range = document.getElementById('range');
     rangeValueContainer = document.getElementById('range-value');
-    scoreCounter = document.getElementById('score-counter');
+    //scoreCounter = document.getElementById('score-counter');
     keyButton = document.getElementById('key-button');
+    isOpenClass = "modal-is-open";
+    openingClass = "modal-is-opening";
+    closingClass = "modal-is-closing";
+    scrollbarWidthCssVar = "--pico-scrollbar-width";
+    animationDuration = 400; // ms
+    visibleModal = null;
+    confirmModal = document.getElementById('modal-confirm');
+    cancelModal = document.getElementById('modal-cancel');
     items = [];
     game = new Game();
     isPlaying = false;
@@ -52,18 +60,81 @@ class TrailGameView {
             this.rangeValueContainer.innerText = this.getRangeValue()
         });
 
-        this.keyButton.addEventListener('click', () => {
+        this.keyButton.addEventListener('click', (event) => {
             this.incrementScore();
+            this.toggleModal(event);
         });
 
         this.revealAllButton.addEventListener('click', () => {
             this.revealAll();
         });
+
+        document.addEventListener("click", (event) => {
+            if (this.visibleModal === null) return;
+            const modalContent = this.visibleModal.querySelector("article");
+            const isClickInside = modalContent.contains(event.target);
+            !isClickInside && this.closeModal(this.visibleModal);
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && this.visibleModal) {
+              this.closeModal(this.visibleModal);
+            }
+          });
+
+        this.confirmModal.addEventListener('click', (event) => {
+            this.toggleModal(event);
+        });
+
+        this.cancelModal.addEventListener('click', (event) => {
+            this.toggleModal(event);
+        });
     }
+
+    toggleModal = (event) => {
+        event.preventDefault();
+        const modal = document.getElementById('modal');
+        if (!modal) return;
+        modal && (modal.open ? this.closeModal(modal) : this.openModal(modal));
+    };
+
+    openModal = (modal) => {
+        const { documentElement: html } = document;
+        const scrollbarWidth = this.getScrollbarWidth();
+        if (scrollbarWidth) {
+            html.style.setProperty(scrollbarWidthCssVar, `${scrollbarWidth}px`);
+        }
+        html.classList.add(this.isOpenClass, this.openingClass);
+        setTimeout(() => {
+            this.visibleModal = modal;
+            html.classList.remove(this.openingClass);
+        }, this.animationDuration);
+        modal.showModal();
+    };
+
+    closeModal = (modal) => {
+        this.visibleModal = null;
+        const { documentElement: html } = document;
+        html.classList.add(this.closingClass);
+        setTimeout(() => {
+            html.classList.remove(this.closingClass, this.isOpenClass);
+            html.style.removeProperty(this.scrollbarWidthCssVar);
+            modal.close();
+        }, this.animationDuration);
+    };
+
+    getScrollbarWidth = () => {
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        return scrollbarWidth;
+    };
+      
+    isScrollbarVisible = () => {
+        return document.body.scrollHeight > screen.height;
+    };
 
     incrementScore() {
         this.game.addKey();
-        this.scoreCounter.innerText = this.game.getKeysString();
+        //this.scoreCounter.innerText = this.game.getKeysString();
     }
 
     toggleBlur(item) {

@@ -148,16 +148,52 @@ body {
     border-radius: 1rem;
 }
 
+.home-container {
+    margin: 5rem auto;
+}
+
+#title {
+    font-size: 1rem;
+    color: var(--contrast);
+}
+
+#menu {
+    margin: 0;
+    background-color: var(--pico-background-color);
+}
+
+#menu summary::after {
+    display: none;
+}
+
+#menu-summary {
+    padding: 0.2rem 0.4rem;
+}
+
+#menu-ul > li:last-child {
+    display: none;
+}
+
+#theme-switcher {
+    width: 2.5rem;
+    border-radius: 50%;
+    margin: 0;
+}
+
 .attached-to-top {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--background-color);
     z-index: 1000;
     margin: 0;
-    border-bottom: 1px inset #000;
-    height: 3.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 4rem;
+    background-color: var(--pico-background-color);
 }
 
 .attached-to-top ul:first-child {
@@ -171,35 +207,34 @@ body {
 article {
     padding-bottom: 1rem;
     margin: 1rem 2rem;
+    border-radius: 1rem;
 }
 
 .nav-button {
     padding: 0.2rem 0.4rem;
 }
 
-#logout-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#logout-li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .card-img {
-    width: 30%;
-    height: 200px;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    margin: auto;
+    object-fit: fill;
 }
 
 .card-header {
+    padding: 1rem;
+}
+
+.card-header hgroup > p {
+    font-size: 0.8rem;
+}
+
+.card-footer {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .letters-container {
@@ -267,7 +302,7 @@ article {
 }
 
 .blur {
-    filter: blur(5px);
+    filter: blur(7px);
 }
 
 main {
@@ -290,7 +325,7 @@ main {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-evenly;
-    margin: 4rem 2rem 2rem 2rem;
+    margin: 6rem 2rem 2rem 2rem;
     width: auto;
     max-width: none;
     @media (max-width: 900px) {
@@ -481,7 +516,7 @@ main {
 .color-group-8 { border-color: grey; }
 .color-group-9 { border-color: teal; }
 
-#flash-start {
+#flash-start, #flash-restart {
     margin: 1rem;
     width: 6rem;
     height: 6rem;
@@ -493,12 +528,18 @@ main {
     cursor: pointer;
 }
 
-#flash-start:hover {
+#flash-start:hover, #flash-restart:hover {
     color: dodgerblue;
+}
+
+#flash-message {
+    font-size: 3rem;
+    margin-bottom: 3rem;
 }
 
 .flash-play-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -512,7 +553,7 @@ main {
 }
 
 #lightning-img {
-    width: 60%;
+    width: 50%;
     height: auto;
     margin-top: 2rem;
     img {
