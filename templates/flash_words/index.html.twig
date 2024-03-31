@@ -34,7 +34,7 @@
             <form id="word-list-form" {% if update %} action="{{ path("flash_words_update", {"id": wordList.getId()}) }}" {% else %} action="{{ path("flash_words_add") }}" {% endif %} method="post">
                 <div class="form-group">
                     <input type="text" placeholder="Nom de la liste" class="form-control" id="listName" name="title" required {% if update %} value="{{ wordList.getTitle() }}" {% endif %}>
-                    <button type="submit" class="list-submit material-icons">save_alt</button>
+                    <button type="submit" class="list-submit"><i class="material-icons">save_alt</i>Enregistrer</button>
                 </div>
                 <div class="form-group">
                     <h3>Mots de la liste</h3>

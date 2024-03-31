@@ -10,7 +10,7 @@
                 <li><button id="key-button" class="game-button contrast material-icons-outlined">key add</button></li>
                 <li><button id="reveal-button" class="game-button contrast outline material-icons-outlined">visibility</button></li>
                 <li>
-                    <label for="range">
+                    <label for="range" class="range-container">
                         <input type="range" min="0.5" max="5" value="2.0" id="range" step="0.2" name="range">
                         Vitesse : <span id="range-value">2.0</span>
                     </label>
@@ -24,20 +24,17 @@
     </main>
     <dialog id="modal">
         <article>
-            <h2>Confirm Your Membership</h2>
-            <p>
-                Thank you for signing up for a membership!
-                Please review the membership details below:
-            </p>
-            <ul>
-                <li>Membership: Individual</li>
-                <li>Price: $10</li>
-            </ul>
+            <header>
+                <h2>Bravo!</h2>
+                <p>
+                    C'est la bonne réponse!
+                </p>
+            </header>
+            <div class="img-container">
+                <img src="{{ asset('img/win-' ~ random(1, 7) ~ '.webp') }}" alt="Bravo!" id="modal-img">
+            </div>
             <footer>
-                <button id="modal-cancel" className="secondary">
-                    Cancel
-                </button>
-                <button id="modal-confirm">Confirm</button>
+                <button id="modal-confirm">Continuer</button>
             </footer>
         </article>
     </dialog>

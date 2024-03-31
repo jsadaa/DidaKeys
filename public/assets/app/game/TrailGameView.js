@@ -17,7 +17,7 @@ class TrailGameView {
     animationDuration = 400; // ms
     visibleModal = null;
     confirmModal = document.getElementById('modal-confirm');
-    cancelModal = document.getElementById('modal-cancel');
+    modalImage = document.getElementById('modal-img');
     items = [];
     game = new Game();
     isPlaying = false;
@@ -85,10 +85,6 @@ class TrailGameView {
         this.confirmModal.addEventListener('click', (event) => {
             this.toggleModal(event);
         });
-
-        this.cancelModal.addEventListener('click', (event) => {
-            this.toggleModal(event);
-        });
     }
 
     toggleModal = (event) => {
@@ -99,6 +95,10 @@ class TrailGameView {
     };
 
     openModal = (modal) => {
+
+        const random = Math.floor(Math.random() * 7) + 1;
+        this.modalImage.src = `/assets/img/win-${random}.webp`;
+
         const { documentElement: html } = document;
         const scrollbarWidth = this.getScrollbarWidth();
         if (scrollbarWidth) {
@@ -127,7 +127,7 @@ class TrailGameView {
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
         return scrollbarWidth;
     };
-      
+
     isScrollbarVisible = () => {
         return document.body.scrollHeight > screen.height;
     };

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-    <link rel="stylesheet" href="{{ asset('styles/pico/pico.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/pico/pico.min.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     {% block stylesheets %}
     {% endblock %}
@@ -12,26 +12,30 @@
     {% endblock %}
 </head>
 <body>
+        <div id="login-container" class="container">
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-    <div id="login-container" class="container">
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+            <form id="login-form" action="{{ path('login') }}" method="post">
+                <h2>DIDA KEYS !</h2>
+                <fieldset>
+                    <label for="username">
+                        Email
+                        <input type="text" id="username" name="_username" value="{{ last_username }}">
+                    </label>
 
-        <form id="login-form" action="{{ path('login') }}" method="post">
-            <label for="username">Email</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}">
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="_password">
+                    <label for="password">
+                        Mot de passe
+                        <input type="password" id="password" name="_password">
+                    </label>
 
-            {# If you want to control the URL the user is redirected to on success
-                <input type="hidden" name="_target_path" value="/account"> #}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            <button type="submit">login</button>
-        </form>
-    </div>
+                    <button type="submit">login</button>
+                </fieldset>
+            </form>
+        </div>
 </body>
 </html>
