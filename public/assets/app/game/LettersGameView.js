@@ -24,11 +24,20 @@ class LettersGameView extends TrailGameView {
                 event.preventDefault();
 
                 if (this.isPlaying) {
+                    this.pauseButton.classList.add('selected-game-button');
+                    this.playButton.classList.remove('selected-game-button');
+                    this.stopButton.classList.remove('selected-game-button');
                     this.pause();
                 } else if (this.isPaused) {
+                    this.playButton.classList.add('selected-game-button');
+                    this.pauseButton.classList.remove('selected-game-button');
+                    this.stopButton.classList.remove('selected-game-button');
                     this.resume();
                     this.play();
                 } else {
+                    this.playButton.classList.add('selected-game-button');
+                    this.pauseButton.classList.remove('selected-game-button');
+                    this.stopButton.classList.remove('selected-game-button');
                     this.play();
                 }
             }
