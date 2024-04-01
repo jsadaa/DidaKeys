@@ -8,7 +8,7 @@
         <div class="list-list">
             <h2>Listes de mots</h2>
             {% for list in wordLists %}
-                <div class="container list-list-container" role="group">
+                <div class="container list-list-container">
                     <details role="list" class="list-detail dropdown">
                         <summary aria-haspopup="listbox">{{ list.getTitle() }}</summary>
                         <ul role="listbox">
