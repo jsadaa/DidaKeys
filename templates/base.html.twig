@@ -37,6 +37,19 @@
                     <a href="{{ path("home")}}" class="contrast"><strong id="title">DIDA KEYS</strong></a>
                 </li>
             </ul>
+            {% if app.request.attributes.get('_route') == 'letter_game' or app.request.attributes.get('_route') == 'number_game' %}
+                <ul>
+                    <li>
+                        <span>Score</span>
+                    </li>
+                    <li>
+                        <span id="score-counter">0</span>
+                    </li>
+                    <li>
+                        <i id="key-icon" class="material-icons-outlined">key</i>
+                    </li>
+                </ul>
+            {% endif %}
             <ul>
                 <li>
                     <button id="theme-switcher" class="nav-button contrast outline">
@@ -47,19 +60,6 @@
                 </li>
             </ul>
         </nav>
-            <!--{% if app.request.attributes.get('_route') != 'home' %}
-                <ul>
-                    <li>
-                        <a href="#">Scores</a>
-                    </li>
-                    <li>
-                        <span id="score-counter">0</span>
-                    </li>
-                    <li>
-                        <i id="key-icon" class="material-icons-outlined">key</i>
-                    </li>
-                </ul>
-            {% endif %}-->
         {% block body %}{% endblock %}
         <script type="module" src="{{ asset('app/index.js') }}"></script>
     </body>
