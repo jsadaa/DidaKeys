@@ -163,7 +163,7 @@ body {
 
 #title {
     font-size: 1rem;
-    color: var(--contrast);
+    color: var(--pico-contrast);
 }
 
 #menu {
@@ -348,7 +348,7 @@ main {
 }
 
 .new-list {
-    margin-top: var(--spacing);
+    margin-top: var(--pico-spacing);
     max-width: 40%;
     width: 40%;
     @media (max-width: 900px) {
@@ -358,7 +358,7 @@ main {
 }
 
 .list-list {
-    margin-top: var(--spacing);
+    margin-top: var(--pico-spacing);
     max-width: 40%;
     width: 40%;
     height: 100%;
@@ -385,11 +385,11 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    margin-bottom: var(--pico-spacing);
 }
 
 .list-select-button {
-    margin-bottom: var(--spacing);
-    margin-left: var(--spacing);
+    margin-left: var(--pico-spacing);
     padding: 0.6rem 0.8rem;
 }
 
