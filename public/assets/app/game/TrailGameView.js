@@ -8,7 +8,7 @@ class TrailGameView {
     revealAllButton = document.getElementById('reveal-button');
     range = document.getElementById('range');
     rangeValueContainer = document.getElementById('range-value');
-    //scoreCounter = document.getElementById('score-counter');
+    scoreCounter = document.getElementById('score-counter');
     keyButton = document.getElementById('key-button');
     isOpenClass = "modal-is-open";
     openingClass = "modal-is-opening";
@@ -34,7 +34,7 @@ class TrailGameView {
             this.pauseButton.classList.remove('selected-game-button');
             this.stopButton.classList.remove('selected-game-button');
 
-            if (!this.isPlaying && !this.isPaused) { // new condition here
+            if (!this.isPlaying && !this.isPaused) {
                 this.play();
             }
             else if (this.isPaused) {
@@ -102,7 +102,7 @@ class TrailGameView {
         const { documentElement: html } = document;
         const scrollbarWidth = this.getScrollbarWidth();
         if (scrollbarWidth) {
-            html.style.setProperty(scrollbarWidthCssVar, `${scrollbarWidth}px`);
+            html.style.setProperty(this.scrollbarWidthCssVar, `${scrollbarWidth}px`);
         }
         html.classList.add(this.isOpenClass, this.openingClass);
         setTimeout(() => {
@@ -134,7 +134,7 @@ class TrailGameView {
 
     incrementScore() {
         this.game.addKey();
-        //this.scoreCounter.innerText = this.game.getKeysString();
+        this.scoreCounter.innerText = this.game.getKeysString();
     }
 
     toggleBlur(item) {
