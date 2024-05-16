@@ -20,6 +20,7 @@ sudo cat /etc/environment > .env.local
 echo "Installation de DidaKeys dans le répertoire '$NEW_RELEASE_PATH'"
 
 sudo chown -R leopa:www-data "$NEW_RELEASE_PATH"
+sudo chmod -R 755 "$NEW_RELEASE_PATH"
 
 cd "$NEW_RELEASE_PATH"
 
