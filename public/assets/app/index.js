@@ -36,3 +36,11 @@ window.onload = () => {
     let path = window.location.pathname.replace(/\/\d*$/, '').valueOf();
     router.navigate(path);
 };
+
+const errorNotification = document.getElementById('error-notification');
+
+if (errorNotification) {
+    setTimeout(() => {
+        errorNotification.style.display = 'none';
+    }, 5000);
+}

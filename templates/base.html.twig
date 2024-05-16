@@ -37,7 +37,7 @@
                     <a href="{{ path("home")}}" class="contrast"><strong id="title">DIDA KEYS</strong></a>
                 </li>
             </ul>
-            {% if app.request.attributes.get('_route') == 'letter_game' or app.request.attributes.get('_route') == 'number_game' %}
+            {% if app.request.attributes.get('_route') == 'letter_game' or app.request.attributes.get('_route') == 'number_game' or app.request.attributes.get('_route') == 'flash_words_play' %}
                 <ul>
                     <li>
                         <span>Score</span>
@@ -60,6 +60,11 @@
                 </li>
             </ul>
         </nav>
+        {% if error is defined %}
+            <div id="error-notification">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
         {% block body %}{% endblock %}
         <script type="module" src="{{ asset('app/index.js') }}"></script>
     </body>

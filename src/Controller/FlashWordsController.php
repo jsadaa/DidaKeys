@@ -34,7 +34,7 @@ class FlashWordsController extends AbstractController
     public function addWordList(Request $request): Response
     {
         /** @var User $user */
-        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
+        $user = $this->getUser();
 
         $data = $request->request->all();
         $title = $data['title'];
@@ -51,77 +51,101 @@ class FlashWordsController extends AbstractController
     #[Route('/flash-words/remove/{id}', name: 'flash_words_remove')]
     public function removeWordList(int $id): Response
     {
-        /** @var User $user */
-        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
-        $wordList = $user->findWordListById($id);
+        try {
+            /** @var User $user */
+            $user = $this->getUser();
+            $wordList = $user->findWordListById($id);
 
-        if (is_null($wordList)) {
-            throw $this->createNotFoundException('Word list not found');
+            if (is_null($wordList)) {
+                throw $this->createNotFoundException('La liste de mots n\'existe pas');
+            }
+
+            $user->removeWordList($wordList);
+            $this->userRepository->save($user);
+
+            return $this->redirectToRoute('flash_words');
+        } catch (\Exception $e) {
+            return $this->render('home/index.html.twig', [
+                'error' => $e->getMessage(),
+            ]);
         }
-
-        $user->removeWordList($wordList);
-        $this->userRepository->save($user);
-
-        return $this->redirectToRoute('flash_words');
     }
 
     #[Route('/flash-words/play/{id}', name: 'flash_words_play')]
     public function playWordList(int $id): Response
     {
-        /** @var User $user */
-        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
-        $wordList = $user->findWordListById($id);
+        try {
+            /** @var User $user */
+            $user = $this->getUser();
+            $wordList = $user->findWordListById($id);
 
-        if (is_null($wordList)) {
-            throw $this->createNotFoundException('Word list not found');
+            if (is_null($wordList)) {
+                throw $this->createNotFoundException('La liste de mots n\'existe pas');
+            }
+
+            return $this->render('flash_words/play.html.twig', [
+                'wordList' => $wordList,
+            ]);
+        } catch (\Exception $e) {
+            return $this->render('home/index.html.twig', [
+                'error' => $e->getMessage(),
+            ]);
         }
-
-        return $this->render('flash_words/play.html.twig', [
-            'wordList' => $wordList,
-        ]);
     }
 
     // edit
     #[Route('/flash-words/edit/{id}', name: 'flash_words_edit')]
     public function editWordList(int $id): Response
     {
-        /** @var User $user */
-        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
-        $wordLists = $user->getWordLists();
-        $wordList = $user->findWordListById($id);
+        try {
+            /** @var User $user */
+            $user = $this->getUser();
+            $wordLists = $user->getWordLists();
+            $wordList = $user->findWordListById($id);
 
-        if (is_null($wordList)) {
-            throw $this->createNotFoundException('Word list not found');
+            if (is_null($wordList)) {
+                throw $this->createNotFoundException('La liste de mots n\'existe pas');
+            }
+
+            return $this->render('flash_words/index.html.twig', [
+                'wordList' => $wordList,
+                'wordLists' => $wordLists,
+                'update' => true,
+            ]);
+        } catch (\Exception $e) {
+            return $this->render('home/index.html.twig', [
+                'error' => $e->getMessage(),
+            ]);
         }
-
-        return $this->render('flash_words/index.html.twig', [
-            'wordList' => $wordList,
-            'wordLists' => $wordLists,
-            'update' => true,
-        ]);
     }
 
     //update
     #[Route('/flash-words/update/{id}', name: 'flash_words_update', methods: ['POST'])]
     public function updateWordList(Request $request, int $id): Response
     {
-        /** @var User $user */
-        $user = $this->getUser() ?: throw new \LogicException('This can not happen');
-        $wordList = $user->findWordListById($id);
+        try {
+            /** @var User $user */
+            $user = $this->getUser();
+            $wordList = $user->findWordListById($id);
 
-        if (is_null($wordList)) {
-            throw $this->createNotFoundException('Word list not found');
+            if (is_null($wordList)) {
+                throw $this->createNotFoundException('La liste de mots n\'existe pas');
+            }
+
+            $data = $request->request->all();
+            $title = $data['title'];
+            $words = $data['words'];
+
+            $wordList->setTitle($title);
+            $wordList->setWords($words);
+
+            $this->userRepository->save($user);
+
+            return $this->redirectToRoute('flash_words');
+        } catch (\Exception $e) {
+            return $this->render('home/index.html.twig', [
+                'error' => $e->getMessage(),
+            ]);
         }
-
-        $data = $request->request->all();
-        $title = $data['title'];
-        $words = $data['words'];
-
-        $wordList->setTitle($title);
-        $wordList->setWords($words);
-
-        $this->userRepository->save($user);
-
-        return $this->redirectToRoute('flash_words');
     }
 }

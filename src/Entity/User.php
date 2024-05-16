@@ -124,6 +124,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function findWordListById(int $id): ?WordList
     {
-        return $this->wordLists->filter(fn (WordList $wordList) => $wordList->getId() === $id)->first();
+        $wordList = $this->wordLists->filter(fn (WordList $wordList) => $wordList->getId() === $id)->first();
+
+        return $wordList ?: null;
     }
 }
