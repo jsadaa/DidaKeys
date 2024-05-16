@@ -43,6 +43,7 @@ db-fixtures:
 compile-assets:
 	php bin/console asset-map:compile
 
-install:
+install@prod:
 	composer install --no-dev --optimize-autoloader
+	make compile-assets
 	make db-migrate
