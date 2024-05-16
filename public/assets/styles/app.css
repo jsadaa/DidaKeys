@@ -561,13 +561,27 @@ main {
     cursor: pointer;
 }
 
-#flash-start:hover, #flash-restart:hover {
+#flash-quit {
+    margin: 1rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: blue;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#flash-start:hover, #flash-restart:hover, #flash-quit:hover {
     color: dodgerblue;
 }
 
 #flash-message {
     font-size: 3rem;
     margin-bottom: 3rem;
+    text-align: center;
 }
 
 .flash-play-container {
@@ -583,6 +597,10 @@ main {
 .word {
     font-size: 5rem;
     margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #lightning-img {
@@ -607,3 +625,61 @@ main {
     width: 70%;
     height: auto;
 }
+
+.audio-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+
+#top-items {
+    position: fixed;
+    top: 4.2rem;
+    color: var(--pico-contrast);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#paging-counter {
+    margin-right: 3rem;
+}
+
+.flash-key-button {
+    border: none;
+    border-radius: 20px;
+    padding: 0.1rem 0.3rem;
+    width: auto;
+    height: auto;
+    background-color: blue;
+}
+
+.flash-key-button:hover {
+    background-color: dodgerblue;
+}
+
+#flash-audio {
+    width: auto;
+}
+
+#error-notification {
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+    position: fixed;
+    top: 3rem;
+    left: 0.5rem;
+    z-index: 1000;
+}
+
+#error-notification > p {
+    margin: 0;
+    color: white;
+}
+
+
