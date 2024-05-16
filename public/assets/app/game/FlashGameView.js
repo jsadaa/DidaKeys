@@ -8,8 +8,8 @@ class FlashGameView {
     restartButton = document.getElementById('flash-restart');
     quitButton = document.getElementById('flash-quit');
     message = document.getElementById('flash-message');
-    winMessage = "Gagné !";
-    loseMessage = "Perdu pour cette fois... 😢 On recommence ?";
+    winMessage = "Super ! C'est un sans faute ! 🎉";
+    loseMessage = "C'est en se trompant qu'on apprend ! 😊 On recommence ?";
     startMessage = "Prêt.e.s ?";
     isStarted = false;
     wordCount = 0;
