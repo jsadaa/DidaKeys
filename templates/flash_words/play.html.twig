@@ -4,16 +4,29 @@
 
 {% block body %}
     <main class="container flash-play-container">
+        <div id="top-items">
+            <div id="paging-counter">1 / {{ wordList.getWords()|length }}</div>
+            <button id="flash-key-button" class="flash-key-button contrast material-icons-outlined" style="display: none;">key</button>
+        </div>
         <div id="flash-message">Prêt.e.s ?</div>
         <div id="flash-start" class="material-icons">play_circle</div>
         <div id="flash-restart" style="display: none;" class="material-icons">replay</div>
+        <a id="flash-quit" style="display: none;" href="{{ path('flash_words') }}" class="material-icons">menu</a>
         <div id="lightning-img" style="display: none;">
             <img src="{{ asset('img/lightning_flash_alt_3.png') }}" alt="lightning">
         </div>
         {% for word in wordList.getWords() %}
         <div>
-            <div class="word" style="display: none;">{{ word }}</div>
+            <div class="word" style="display: none;">
+                {{ word }}
+            </div>
         </div>
         {% endfor %}
+        <div id="flash-audio" class="audio-container container" style="display: none;">
+            <audio id="audio-player" controls>
+                <source src="{{ asset('audio/theme-fort-boyard.mp3') }}" type="audio/mpeg">
+                Votre navigateur ne supporte pas la balise audio.
+            </audio>
+        </div>
     </main>
 {% endblock %}
