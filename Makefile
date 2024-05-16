@@ -37,3 +37,13 @@ db-migrate:
 ## Chargement des fixtures
 db-fixtures:
 	bin/console doctrine:fixtures:load --no-interaction
+
+
+## compilation des assets
+compile-assets:
+	php bin/console asset-map:compile
+
+update:
+	git pull
+	composer install --no-dev --optimize-autoloader
+	make db-migrate
