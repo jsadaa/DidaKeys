@@ -33,6 +33,12 @@
             <div class="img-container">
                 <img src="{{ asset('img/win-' ~ random(1, 7) ~ '.webp') }}" alt="Bravo!" id="modal-img">
             </div>
+            <div class="audio-container container">
+                <audio id="audio-player" controls>
+                    <source src="{{ asset('audio/theme-fort-boyard.mp3') }}" type="audio/mpeg">
+                    Votre navigateur ne supporte pas la balise audio.
+                </audio>
+            </div>
             <footer>
                 <button id="modal-confirm">Continuer</button>
             </footer>

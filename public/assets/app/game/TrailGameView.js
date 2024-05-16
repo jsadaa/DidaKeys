@@ -18,13 +18,16 @@ class TrailGameView {
     visibleModal = null;
     confirmModal = document.getElementById('modal-confirm');
     modalImage = document.getElementById('modal-img');
+    audioPlayer = document.getElementById('audio-player');
     items = [];
     game = new Game();
     isPlaying = false;
     isPaused = false;
     currentItemIndex = 0;
 
-    constructor() {}
+    constructor() {
+        this.audioPlayer.volume = 0.7;
+    }
 
     buildCastle() {}
 
@@ -110,6 +113,8 @@ class TrailGameView {
             html.classList.remove(this.openingClass);
         }, this.animationDuration);
         modal.showModal();
+
+        this.audioPlayer.play();
     };
 
     closeModal = (modal) => {
@@ -121,6 +126,9 @@ class TrailGameView {
             html.style.removeProperty(this.scrollbarWidthCssVar);
             modal.close();
         }, this.animationDuration);
+
+        this.audioPlayer.pause();
+        this.audioPlayer.currentTime = 0;
     };
 
     getScrollbarWidth = () => {
