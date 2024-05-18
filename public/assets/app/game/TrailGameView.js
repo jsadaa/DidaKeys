@@ -6,6 +6,7 @@ class TrailGameView {
     pauseButton = document.getElementById('pause-button');
     stopButton = document.getElementById('stop-button');
     revealAllButton = document.getElementById('reveal-button');
+    fullscreenButton = document.getElementById('fullscreen-button');
     range = document.getElementById('range');
     rangeValueContainer = document.getElementById('range-value');
     scoreCounter = document.getElementById('score-counter');
@@ -88,6 +89,10 @@ class TrailGameView {
         this.confirmModal.addEventListener('click', (event) => {
             this.toggleModal(event);
         });
+
+        this.fullscreenButton.addEventListener('click', () => {
+            this.toggleFullscreen();
+        });
     }
 
     toggleModal = (event) => {
@@ -96,6 +101,15 @@ class TrailGameView {
         if (!modal) return;
         modal && (modal.open ? this.closeModal(modal) : this.openModal(modal));
     };
+
+    toggleFullscreen = () => {
+        const { documentElement: html } = document;
+        if (document.fullscreenElement) {
+            document.exitFullscreen().then(r => r).catch(e => console.error(e));
+        } else {
+            html.requestFullscreen().then(r => r).catch(e => console.error(e));
+        }
+    }
 
     openModal = (modal) => {
 
