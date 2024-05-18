@@ -14,6 +14,9 @@ git clone git@github.com:jsadaa/DidaKeys.git "$NEW_RELEASE_PATH"
 # Déplacement dans le répertoire du projet
 cd "$NEW_RELEASE_PATH"
 
+# Ajout des variables d'environnement définies dans /etc/environment dans le .env.local (fix en attendant de déployer via la ci)
+sudo cat /etc/environment > .env.local
+
 echo "Installation de DidaKeys dans le répertoire '$NEW_RELEASE_PATH'"
 
 sudo chown -R leopa:www-data "$NEW_RELEASE_PATH"
