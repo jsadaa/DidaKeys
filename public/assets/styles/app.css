@@ -268,7 +268,7 @@ article {
     @media (max-width: 768px) {
         grid-template-columns: repeat(5, 1fr);
     }
-    grid-gap: 1rem;
+    grid-gap: 0.4rem;
     flex-wrap: wrap;
     margin: 1rem;
     border-radius: 1rem;
