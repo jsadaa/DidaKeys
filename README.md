@@ -3,7 +3,7 @@
 ## Description
 
 Dida-Keys is a small web app with didactic games to help children learn letters, numbers and words. 
-It's a project I developed in cooperation with an association called "Le Labo Collectif" in Lyon, France, composed of teachers, educators and psychologists.
+It's a project I developed in cooperation with an association called [Le Labo Collectif](https://www.helloasso.com/associations/le-labo-collectif) in Lyon, France, composed of teachers, educators and psychologists.
 
 Their goal is to help children learn to manage conflict and support students in situations of educational deprivation.
 
